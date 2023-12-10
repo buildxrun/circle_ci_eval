@@ -3,7 +3,7 @@ Dummy repo for evaluating the Circle-CI tool
 
 ## Circle CI Status
 
-![CircleCI](https://github.com/buildxrun/circle_ci_eval/tree/main.svg?style=svg)
+![CircleCI](https://github.com/buildxrun/circle_ci_eval/main.yml/badge.svg)
 
 [![CircleCI](https://circleci.com/gh/circleci/analytics-clj/tree/master.svg?style=svg)](https://circleci.com/gh/circleci/analytics-clj/tree/master)
 
