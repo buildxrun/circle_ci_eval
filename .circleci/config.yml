@@ -14,15 +14,13 @@ jobs:
     # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
       - checkout
-      - run: git branch
-      - run: git checkout dev
       - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+          name: "ESP32 Build Firmware"
+          command: "docker run --rm -v $PWD:/project -w /project -u $UID -e HOME=/tmp espressif/idf idf.py build"
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
-  idf-build-workflow:
+  build-firmware:
     jobs:
       - idf-build
