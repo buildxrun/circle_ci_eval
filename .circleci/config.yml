@@ -10,20 +10,16 @@ jobs:
     # See: https://circleci.com/docs/configuration-reference/#executor-job
     docker:
       - image: cimg/base:stable
-    working_directory: $PWD
     # Add steps to the job
     # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
-      - setup_remote_docker
       - checkout
-
-      - run: echo PWD is "$PWD"
-      - run: echo UID is "$UID"
+      - setup_remote_docker
       - run: ls -al $PWD
+      - run: ls -al ~/project
       - run:
-          name: "test"
-          command: "docker run --rm -v $PWD:/project -w /project -u $UID -e HOME=/tmp espressif/idf:release-v4.4 idf.py build"
-      - run: idf.py --version
+          name: "build"
+          command: "docker run --rm -v $PWD:/project -w /project -u $UID:$(id -g $USER) -e HOME=/tmp espressif/idf idf.py build"
 
 
 # Orchestrate jobs using workflows
