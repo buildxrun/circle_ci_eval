@@ -9,14 +9,22 @@ jobs:
     # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/configuration-reference/#executor-job
     docker:
-      - image: espressif/idf:release-v4.4
+      - image: cimg/base:stable
+    working_directory: $PWD
     # Add steps to the job
     # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
+      - setup_remote_docker
       - checkout
+
+      - run: echo PWD is "$PWD"
+      - run: echo UID is "$UID"
+      - run: ls -al $PWD
       - run:
-          name: "ESP32 Build Firmware"
-          command: "docker run --rm -v $PWD:/project -w /project -u $UID -e HOME=/tmp espressif/idf idf.py build"
+          name: "test"
+          command: "docker run --rm -v $PWD:/project -w /project -u $UID -e HOME=/tmp espressif/idf:release-v4.4 idf.py build"
+      - run: idf.py --version
+
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
