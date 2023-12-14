@@ -16,10 +16,12 @@ jobs:
       - checkout
       - setup_remote_docker
       - run: ls -al $PWD
-      - run: ls -al ~/project
+      - run:
+          name: "precheck"
+          command: "docker run --rm --privileged -v $PWD:/project -w /project -u $UID -e HOME=/tmp espressif/idf ls -al /project"
       - run:
           name: "build"
-          command: "docker run --rm -v $PWD:/project -w /project -u $UID:$(id -g $USER) -e HOME=/tmp espressif/idf idf.py build"
+          command: "docker run --rm --privileged -v $PWD:/project -w /project -u $UID -e HOME=/tmp espressif/idf idf.py build"
 
 
 # Orchestrate jobs using workflows
