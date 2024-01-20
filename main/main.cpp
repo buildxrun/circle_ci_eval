@@ -19,9 +19,9 @@ extern "C" void app_main(void)
 {
     gpio_set_direction(GPIO_NUM_32, GPIO_MODE_OUTPUT);
     gpio_set_level(GPIO_NUM_32, 0);
-    vTaskDelay(10);
+    vTaskDelay(100);
     gpio_set_level(GPIO_NUM_32, 1);
-    vTaskDelay(10);
+    vTaskDelay(100);
 
     while (true)
     {
